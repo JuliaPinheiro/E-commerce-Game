@@ -27,6 +27,16 @@ public class ProdutoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List<Produto>> getByNome(@PathVariable String nome) {
+        return ResponseEntity.ok(produtoRepository.findByNome(nome));
+    }
+
+    @GetMapping("/preco/{preco}")
+    public ResponseEntity<List<Produto>> getByPreco(@PathVariable Double preco) {
+        return ResponseEntity.ok(produtoRepository.findByPreco(preco));
+    }
+
     @PostMapping
     public ResponseEntity<Produto> create(@Valid @RequestBody Produto produto) {
         return ResponseEntity.ok(produtoRepository.save(produto));
